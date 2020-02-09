@@ -8,11 +8,22 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
 
-    public function index()
+    // public function index()
+    // {
+    //     $books = Book::latest()->paginate(5);
+    //     return view('books.index',compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
+    // }
+
+    public function index(Request $request)
     {
-        $books = Book::latest()->paginate(5);
+        $query = $request->get('search');
+
+        $books = Book::where('title', 'LIKE', "%$query%")
+                    ->orWhere('author', 'LIKE', "%$query%")
+                    ->get();
+
         return view('books.index',compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
-    }
+    } 
 
     public function create()
     {
@@ -34,7 +45,6 @@ class BookController extends Controller
     {
         return view('books.show',compact('book'));
     }
-
 
     public function edit(Book $book)
     {

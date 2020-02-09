@@ -18,12 +18,16 @@
     @endif
 
     @if(sizeof($books) > 0)
+        <form class="form-inline md-form mr-auto mb-4" action="{{ route('books.index') }}" method="GET">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-rounded btn-sm my-0" type="submit"><i class="fa fa-search"></i></button>
+        </form>
         <table class="table table-bordered">
             <tr>
                 <th>No</th>
                 <th>Title</th>
                 <th>Author</th>
-                <th width="280px">More</th>
+                <th width="160px"></th>
             </tr>
             @foreach ($books as $book)
                 <tr>
@@ -33,7 +37,6 @@
                     <td>
                         <form action="{{ route('books.destroy',$book->id) }}" method="POST">
 
-                            <a class="btn btn-info" href="{{ route('books.show',$book->id) }}">Show</a>
                             <a class="btn btn-primary" href="{{ route('books.edit',$book->id) }}">Edit</a>
 
                             @csrf
@@ -49,6 +52,6 @@
         <div class="alert alert-alert">Start Adding to the Database.</div>
     @endif
 
-    {!! $books->links() !!}
+
 
 @endsection
