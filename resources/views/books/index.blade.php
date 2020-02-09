@@ -25,8 +25,8 @@
         <table class="table table-bordered">
             <tr>
                 <th>No</th>
-                <th>Title</th>
-                <th>Author</th>
+                <th>@sortablelink('Title')</th>
+                <th>@sortablelink('Author')</th>
                 <th width="160px"></th>
             </tr>
             @foreach ($books as $book)

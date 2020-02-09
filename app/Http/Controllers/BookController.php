@@ -18,10 +18,10 @@ class BookController extends Controller
     {
         $query = $request->get('search');
 
-        $books = Book::where('title', 'LIKE', "%$query%")
+        $books = Book::sortable()
+                    ->where('title', 'LIKE', "%$query%")
                     ->orWhere('author', 'LIKE', "%$query%")
                     ->get();
-
         return view('books.index',compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
     } 
 
